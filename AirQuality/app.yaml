@@ -1,0 +1,5 @@
+application: weatherstation-ron 
+version: 1
+runtime: java
+threadsafe: true
+

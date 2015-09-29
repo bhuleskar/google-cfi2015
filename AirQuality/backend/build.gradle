@@ -1,0 +1,74 @@
+/*
+ * Copyright 2015 Google Inc. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.google.appengine:gradle-appengine-plugin:1.9.18'
+    }
+}
+
+repositories {
+    mavenCentral();
+}
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'appengine'
+
+sourceCompatibility = JavaVersion.VERSION_1_7
+targetCompatibility = JavaVersion.VERSION_1_7
+
+dependencies {
+    appengineSdk 'com.google.appengine:appengine-java-sdk:1.9.18'
+    compile 'com.google.appengine:appengine-endpoints:1.9.18'
+    compile 'com.google.appengine:appengine-endpoints-deps:1.9.18'
+    compile 'javax.servlet:servlet-api:2.5'
+    compile 'com.googlecode.objectify:objectify:5.1.5'
+    compile 'com.ganyo:gcm-server:1.0.2'
+    compile 'com.google.apis:google-api-services-bigquery:v2-rev235-1.20.0'
+    compile 'com.google.code.gson:gson:1.7.2'
+    compile 'com.google.api-client:google-api-client-servlet:1.20.0'
+    compile 'com.google.api-client:google-api-client-jackson2:1.20.0'
+    compile 'com.google.api-client:google-api-client-appengine:1.20.0'
+    compile files('libs/jackson-core-asl-1.9.2.jar')
+    compile files('libs/jackson-jaxrs-1.9.2.jar')
+    compile files('libs/jackson-mapper-asl-1.9.2.jar')
+    compile files('libs/jackson-xc-1.9.2.jar')
+    compile files('libs/jersey-client-1.19.jar')
+    compile files('libs/jersey-core-1.19.jar')
+    compile files('libs/jersey-json-1.19.jar')
+    compile files('libs/jersey-server-1.19.jar')
+    compile files('libs/jersey-servlet-1.19.jar')
+    compile files('libs/jettison-1.1.jar')
+    compile files('libs/jsr311-api-1.1.1.jar')
+}
+
+appengine {
+    downloadSdk = true
+    appcfg {
+        oauth2 = true
+    }
+    endpoints {
+        getClientLibsOnBuild = true
+        getDiscoveryDocsOnBuild = true
+    }
+}
